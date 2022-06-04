@@ -1,5 +1,5 @@
 export default interface TBoard {
-  type: "animal" | "fruit" | "alphabet";
+  kind: string;
   number: number;
-  pairs: "two" | "three";
+  pairs: number;
 }

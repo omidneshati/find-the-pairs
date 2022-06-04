@@ -5,8 +5,10 @@ import React, {
   PropsWithChildren,
   ReactNode,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
+import gameContext from "../../context/gameContext";
 import { nCards, nKinds, nPairs } from "../../data";
 import { TGameOptions } from "../../types/gameInfo";
 
@@ -24,17 +26,19 @@ const Label: FC<{ title: string }> = ({ title }) => {
   );
 };
 
-const OptionMenu: FC<TGameOptions> = ({
-  cardsKind,
-  setCardsKind,
-  numberOfCards,
-  setNumberOfCards,
-  start,
-  numberOfPairs,
-  setNumberOfPairs,
-  setStart,
-}) => {
-  console.log("kind", cardsKind);
+const OptionMenu: FC = () => {
+  const {
+    cardsKind,
+    setCardsKind,
+    numberOfCards,
+    setNumberOfCards,
+    numberOfPairs,
+    setNumberOfPairs,
+    setStart,
+    setSelected,
+    setFoundPairs,
+  } = useContext(gameContext);
+
   return (
     <div className="grid min-h-screen bg-gray-200 md:place-content-center">
       <div className="flex flex-col items-center w-full gap-3 p-2">
@@ -43,7 +47,6 @@ const OptionMenu: FC<TGameOptions> = ({
             <Label title="Kind" />
             {/* {cardsKind} */}
             {nKinds.map((v) => {
-              console.log("v.icon", v.icon);
               return (
                 <button
                   key={v.value}
@@ -112,7 +115,11 @@ const OptionMenu: FC<TGameOptions> = ({
           </Article>
         </div>
         <button
-          onClick={() => setStart((v) => !v)}
+          onClick={() => {
+            setStart((v) => !v);
+            setSelected([]);
+            setFoundPairs([]);
+          }}
           className="w-full text-3xl text-white rounded-md bg-slate-900 h-36"
         >
           start
