@@ -10,6 +10,7 @@ import makePairs from "../utils/makePairs";
 import shuffle from "../utils/shuffle";
 import contextToArray from "../utils/contextToArray";
 import allEqual from "../utils/allEqual";
+import Head from "next/head";
 
 const reqAlphabet = require.context("../assets/alphabet", true);
 const reqAnimal = require.context("../assets/animal", true);
@@ -92,6 +93,13 @@ const Home: FC = () => {
   };
   return (
     <>
+      <Head>
+        <title>Find The Pair</title>
+        <meta
+          name="description"
+          content="Made By Me --- Omid Neshati :)"
+        ></meta>
+      </Head>
       <WannaPlay />
       <gameInfo.Provider value={ContextValue}>
         {!start ? (
