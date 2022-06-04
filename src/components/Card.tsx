@@ -6,13 +6,13 @@ import { TPick, TSVG } from "../types/gameInfo";
 
 const isExist = (
   selected: TPick,
-  foundPairs: TPick,
+  foundPairs: string[],
   pick: { name: string; id: number }
 ): boolean => {
   const isSelected = selected.find(
     (el) => el.name === pick.name && el.id === pick.id
   );
-  const isFoundPair = foundPairs.find((el) => el.name === pick.name);
+  const isFoundPair = foundPairs.find((el) => el === pick.name);
   if (isSelected || isFoundPair) {
     return true;
   }

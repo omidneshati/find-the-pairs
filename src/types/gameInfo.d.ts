@@ -28,6 +28,6 @@ interface TSelectedCard {
 
 interface TGameContext extends TGameOptions, TSelectedCard {
   cards: TSVGArray;
-  foundPairs: TPick;
-  setFoundPairs: Dispatch<SetStateAction<TPick>>;
+  foundPairs: string[];
+  setFoundPairs: Dispatch<SetStateAction<string[]>>;
 }

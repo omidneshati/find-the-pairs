@@ -23,7 +23,7 @@ const Home: FC = () => {
   const [numberOfPairs, setNumberOfPairs] = useState<number>(2);
   const [cardsKind, setCardsKind] = useState<string>("fruit");
   const [selected, setSelected] = useState<TPick>([]);
-  const [foundPairs, setFoundPairs] = useState<TPick>([]);
+  const [foundPairs, setFoundPairs] = useState<string[]>([]);
 
   const svgs = useMemo(() => {
     if (cardsKind === "alphabet") return contextToArray(reqAlphabet);
@@ -42,9 +42,9 @@ const Home: FC = () => {
   }, [numberOfCards, numberOfPairs, svgs]);
 
   useEffect(() => {
-    if (selected.length > numberOfPairs) {
+    if (selected.length !== 0 && selected.length > numberOfPairs) {
       if (allEqual(selected)) {
-        setFoundPairs((v) => [...v, selected[0]]);
+        setFoundPairs((v) => [...v, selected[0].name]);
         console.log("foundPairs", foundPairs);
       }
       // setTimeout(() => {
