@@ -74,7 +74,8 @@ const Home: FC = () => {
       }, 1000);
       setTimeout(() => {
         setStart(false);
-      }, 2000);
+        setShowImages(false);
+      }, 1500);
     }
   }, [foundPairs.length, numberOfCards, numberOfPairs, selected]);
 
