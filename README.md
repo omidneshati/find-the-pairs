@@ -20,4 +20,4 @@
 
 ## Screen Shots
 
-![enter image description here](https://i.ibb.co/1JL8vDK/ezgif-com-gif-maker.gif)
+![enter image description here](https://i.ibb.co/pZ4xf46/find-the-pair.gif)
