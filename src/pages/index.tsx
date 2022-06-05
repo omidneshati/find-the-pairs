@@ -1,5 +1,11 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
-import Board from "../components/Board";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import GameSection from "../components/game/GameSection";
 import GameOptions from "../components/game/GameOptions";
 import { lowerNumber } from "../data";
@@ -19,6 +25,8 @@ const reqFruit = require.context("../assets/fruit", true);
 const Home: FC = () => {
   const [cards, setCards] = useState<TSVGArray>();
   const [start, setStart] = useState(false);
+  const [end, setEnd] = useState<boolean>(false);
+  const [showImages, setShowImages] = useState<boolean>(false);
   const [numberOfCards, setNumberOfCards] = useState<number>(lowerNumber);
   const [numberOfPairs, setNumberOfPairs] = useState<number>(2);
   const [cardsKind, setCardsKind] = useState<string>("fruit");
@@ -35,29 +43,40 @@ const Home: FC = () => {
   // }, [numberOfCards, numberOfPairs, svgs]);
 
   useMemo(() => {
-    const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
-    const newSvgs = makePairs(numberOfPairs, slicedSVG);
-    console.log("le", newSvgs.length);
-    setCards(shuffle(newSvgs));
-  }, [numberOfCards, numberOfPairs, svgs]);
+    if (start) {
+      const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
+      const newSvgs = makePairs(numberOfPairs, slicedSVG);
+      console.log("le", newSvgs.length);
+      setCards(shuffle(newSvgs));
+    }
+  }, [numberOfCards, numberOfPairs, svgs, start]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (selected.length !== 0 && selected.length > numberOfPairs) {
-      if (allEqual(selected)) {
+      if (allEqual(selected, numberOfPairs)) {
         setFoundPairs((v) => [...v, selected[0].name]);
         console.log("foundPairs", foundPairs);
       }
-      // setTimeout(() => {
       setSelected((v) => v.slice(numberOfPairs));
-      // }, );
       console.log("empty setSelected", selected);
     }
   }, [foundPairs, numberOfPairs, selected]);
 
-  // useMemo(() => {
-  //   if (selected.length >= numberOfPairs) {
-  //   }
-  // }, [numberOfPairs, selected.length]);
+  useEffect(() => {
+    console.log("end", {
+      cardWP: numberOfCards - numberOfPairs,
+      leTP: foundPairs.length * numberOfPairs,
+    });
+    if (numberOfCards - numberOfPairs === foundPairs.length * numberOfPairs) {
+      // if (true) {
+      setShowImages(true);
+      setTimeout(() => {
+        setStart(false);
+        setEnd(true);
+      }, 1000);
+    }
+  }, [foundPairs.length, numberOfCards, numberOfPairs, selected]);
+
   console.log("selected: ", selected);
   console.log("foundPairs", foundPairs);
   console.log("empty setSelected", selected);
@@ -80,6 +99,10 @@ const Home: FC = () => {
     cards,
     start,
     setStart,
+    end,
+    setEnd,
+    showImages,
+    setShowImages,
     numberOfCards,
     setCardsKind,
     setNumberOfCards,
@@ -100,6 +123,7 @@ const Home: FC = () => {
           content="Made By Me --- Omid Neshati :)"
         ></meta>
       </Head>
+      <Endup end={end} setEnd={setEnd} />
       <WannaPlay />
       <gameInfo.Provider value={ContextValue}>
         {!start ? (
@@ -114,7 +138,28 @@ const Home: FC = () => {
   );
 };
 
-const WannaPlay = () => {
+const Endup: FC<{
+  end: boolean;
+  setEnd: Dispatch<SetStateAction<boolean>>;
+}> = ({ end, setEnd }) => {
+  return (
+    <div
+      className="fixed inset-0 z-20 flex items-center justify-center overflow-hidden transition-all duration-100 ease-out bg-slate-900"
+      style={!end ? { bottom: "100%", top: "-100%" } : {}}
+    >
+      <button
+        className="w-2/3 text-3xl text-white rounded-lg bg-slate-600 md:text-4xl md:w-1/3 h-1/6 animate-pulse"
+        onClick={() => {
+          setEnd(false);
+        }}
+      >
+        <p>I Think You Won!</p>
+        <p>SO Wanna Play?!</p>
+      </button>
+    </div>
+  );
+};
+const WannaPlay: FC = () => {
   const [wannaPlay, setWannaPlay] = useState<boolean>(false);
   return (
     <div

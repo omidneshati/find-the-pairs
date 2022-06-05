@@ -12,7 +12,12 @@ type TPick = {
 
 interface TGameOptions {
   start: boolean;
+
   setStart: Dispatch<SetStateAction<boolean>>;
+  end: boolean;
+  setEnd: Dispatch<SetStateAction<boolean>>;
+  showImages: boolean;
+  setShowImages: Dispatch<SetStateAction<boolean>>;
   cardsKind: string;
   setCardsKind: Dispatch<SetStateAction<string>>;
   numberOfCards: number;

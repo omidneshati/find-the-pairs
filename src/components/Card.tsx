@@ -20,11 +20,12 @@ const isExist = (
 };
 
 const Card: FC<TSVG> = ({ id, name, file }) => {
-  const { setSelected, foundPairs, selected } = useContext(gameInfo);
+  const { setSelected, foundPairs, selected, showImages } =
+    useContext(gameInfo);
 
   return (
     <button
-      disabled={isExist(selected, foundPairs, { name, id })}
+      disabled={isExist(selected, foundPairs, { name, id }) || showImages}
       // className="relative w-full h-full mx-auto bg-transparent bg-gray-200 rounded-md aspect-square"
       className="w-full h-full bg-transparent rounded-md aspect-square"
       style={{
@@ -42,7 +43,7 @@ const Card: FC<TSVG> = ({ id, name, file }) => {
           transformStyle: "preserve-3d",
           transform:
             // selected.includes({ name, id }) || foundPairs.includes({ name, id })
-            isExist(selected, foundPairs, { name, id })
+            isExist(selected, foundPairs, { name, id }) || showImages
               ? "rotateY(180deg)"
               : "",
         }}

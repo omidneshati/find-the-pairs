@@ -8,6 +8,7 @@ import React, {
   useContext,
   useState,
 } from "react";
+import { setEnvironmentData } from "worker_threads";
 import gameContext from "../../context/gameContext";
 import { nCards, nKinds, nPairs } from "../../data";
 import { TGameOptions } from "../../types/gameInfo";
@@ -37,6 +38,7 @@ const OptionMenu: FC = () => {
     setStart,
     setSelected,
     setFoundPairs,
+    setEnd,
   } = useContext(gameContext);
 
   return (
@@ -116,7 +118,8 @@ const OptionMenu: FC = () => {
         </div>
         <button
           onClick={() => {
-            setStart((v) => !v);
+            setStart(true);
+            setEnd(false);
             setSelected([]);
             setFoundPairs([]);
           }}

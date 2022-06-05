@@ -1,4 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from "react";
+import { setEnvironmentData } from "worker_threads";
 import gameContext from "../../context/gameContext";
 import Board from "../Board";
 
@@ -23,7 +24,7 @@ const Timer: FC = () => {
 const Turn: FC = () => {
   const [turns, setTurns] = useState(0);
 
-  const { selected, numberOfPairs } = useContext(gameContext);
+  const { selected, numberOfPairs, setShowImages } = useContext(gameContext);
 
   useEffect(() => {
     if (selected.length === numberOfPairs) {
@@ -32,7 +33,11 @@ const Turn: FC = () => {
   }, [numberOfPairs, selected.length]);
 
   return (
-    <div className="flex justify-center h-full row-span-1 ">
+    <div
+      className="flex justify-center h-full row-span-1 "
+      onPointerDownCapture={() => setShowImages(true)}
+      onPointerUpCapture={() => setShowImages(false)}
+    >
       <span className="z-10 grid w-full m-2 text-3xl bg-gray-200 rounded-md place-content-center">
         {turns}
       </span>
@@ -40,13 +45,14 @@ const Turn: FC = () => {
   );
 };
 const GameSection = () => {
-  const { setStart, setFoundPairs } = useContext(gameContext);
+  const { setStart, setFoundPairs, setEnd } = useContext(gameContext);
   return (
     <div className="flex flex-col h-screen gap-3 p-3">
       <div className="grid w-full gap-3 h-2/6 md:h-1/6 grid-row-3 sm:grid-cols-3 sm:grid-rows-none ">
         <button
           onClick={() => {
             setStart(false);
+            setEnd(false);
             setFoundPairs([]);
           }}
           className="row-span-1 text-3xl text-white rounded-md bg-slate-900"
