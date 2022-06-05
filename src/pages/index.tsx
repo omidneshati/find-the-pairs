@@ -68,11 +68,13 @@ const Home: FC = () => {
       leTP: foundPairs.length * numberOfPairs,
     });
     if (numberOfCards - numberOfPairs === foundPairs.length * numberOfPairs) {
-      setEnd(true);
       setShowImages(true);
       setTimeout(() => {
-        setStart(false);
+        setEnd(true);
       }, 1000);
+      setTimeout(() => {
+        setStart(false);
+      }, 2000);
     }
   }, [foundPairs.length, numberOfCards, numberOfPairs, selected]);
 
