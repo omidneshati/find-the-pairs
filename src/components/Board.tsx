@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import Module from "module";
 import { StaticImageData } from "next/image";
 import gameContext from "../context/gameContext";
-const reqAlphabet = require.context("../assets/alphabet", true);
+const reqflower = require.context("../assets/flower", true);
 const reqAnimal = require.context("../assets/animal", true);
 const reqFruit = require.context("../assets/fruit", true);
 
@@ -28,10 +28,10 @@ const Board: FC = () => {
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
   // const svgs = useMemo(() => {
-  // const alphabet = contextToArray(reqAlphabet);
+  // const flower = contextToArray(reqflower);
   // const animals = contextToArray(reqAnimal);
   // const fruits = contextToArray(reqFruit);
-  // if (kind === "alphabet") return alphabet;
+  // if (kind === "flower") return flower;
   // if (kind === "animal") return animals;
   // return fruits;
   // }, [kind]);

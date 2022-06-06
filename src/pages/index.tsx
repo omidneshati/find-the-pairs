@@ -18,7 +18,7 @@ import contextToArray from "../utils/contextToArray";
 import allEqual from "../utils/allEqual";
 import Head from "next/head";
 
-const reqAlphabet = require.context("../assets/alphabet", true);
+const reqflower = require.context("../assets/flower", true);
 const reqAnimal = require.context("../assets/animal", true);
 const reqFruit = require.context("../assets/fruit", true);
 
@@ -34,7 +34,7 @@ const Home: FC = () => {
   const [foundPairs, setFoundPairs] = useState<string[]>([]);
 
   const svgs = useMemo(() => {
-    if (cardsKind === "alphabet") return contextToArray(reqAlphabet);
+    if (cardsKind === "flower") return contextToArray(reqflower);
     if (cardsKind === "animal") return contextToArray(reqAnimal);
     return contextToArray(reqFruit);
   }, [cardsKind]);
@@ -42,14 +42,18 @@ const Home: FC = () => {
   // const cards = useMemo(() => {
   // }, [numberOfCards, numberOfPairs, svgs]);
 
+  const newSvgs = useMemo(() => {
+    const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
+    const newSvgs = makePairs(numberOfPairs, slicedSVG);
+    console.log("le", newSvgs.length);
+    return newSvgs;
+  }, [numberOfCards, numberOfPairs, svgs]);
+
   useMemo(() => {
     if (start) {
-      const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
-      const newSvgs = makePairs(numberOfPairs, slicedSVG);
-      console.log("le", newSvgs.length);
       setCards(shuffle(newSvgs));
     }
-  }, [numberOfCards, numberOfPairs, svgs, start]);
+  }, [newSvgs, start]);
 
   useMemo(() => {
     if (selected.length !== 0 && selected.length > numberOfPairs) {

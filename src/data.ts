@@ -1,6 +1,6 @@
 import fruit from "./assets/fruit/fruits-and-vegetable--1488.svg";
 import animal from "./assets/animal/cat--2477.svg";
-import alphabet from "./assets/alphabet/letter-a--16224.svg";
+import flower from "./assets/flower/lotus--23916.svg";
 
 export const lowerNumber = 24;
 export const totalSpace = 100;
@@ -14,5 +14,5 @@ export const nPairs = [2, 3, 4];
 export const nKinds: { value: string; icon: { src: string } }[] = [
   { value: "fruit", icon: fruit },
   { value: "animal", icon: animal },
-  { value: "alphabet", icon: alphabet },
+  { value: "flower", icon: flower },
 ];
