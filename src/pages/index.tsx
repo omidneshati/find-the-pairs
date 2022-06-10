@@ -9,7 +9,7 @@ import React, {
 import GameSection from "../components/game/GameSection";
 import GameOptions from "../components/game/GameOptions";
 import { lowerNumber } from "../data";
-import gameInfo from "../context/gameContext";
+import GameInfo from "../context/gameContext";
 import { TGameContext, TPick, TSVGArray } from "../types/gameInfo";
 import spliceNumberOfCards from "../utils/spliceNumberOfCards";
 import makePairs from "../utils/makePairs";
@@ -103,9 +103,9 @@ const Home: FC = () => {
       </Head>
       <Endup end={end} setEnd={setEnd} />
       <WannaPlay />
-      <gameInfo.Provider value={ContextValue}>
+      <GameInfo.Provider value={ContextValue}>
         {!start ? <GameOptions /> : <GameSection />}
-      </gameInfo.Provider>
+      </GameInfo.Provider>
     </>
   );
 };
