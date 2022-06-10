@@ -39,9 +39,6 @@ const Home: FC = () => {
     return contextToArray(reqFruit);
   }, [cardsKind]);
 
-  // const cards = useMemo(() => {
-  // }, [numberOfCards, numberOfPairs, svgs]);
-
   const newSvgs = useMemo(() => {
     const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
     const newSvgs = makePairs(numberOfPairs, slicedSVG);
@@ -86,20 +83,6 @@ const Home: FC = () => {
   console.log("selected: ", selected);
   console.log("foundPairs", foundPairs);
   console.log("empty setSelected", selected);
-  // const svgs = (() => {})();
-  // const svgs = contextToArray(svgObj);
-  // if (pairs === 3) {
-  //   if (svgs.length * 3 > number) svgs.splice(number / 3, svgs.length);
-  // } else if (svgs.length * 2 > number) svgs.splice(number / 2, svgs.length);
-
-  // const newSvgs = [...svgs];
-  // if (pairs === 3) newSvgs.push(...svgs);
-  // newSvgs.push(...svgs);
-
-  // let shuffledSvgs = newSvgs
-  //   .map((value) => ({ value, sort: Math.random() }))
-  //   .sort((a, b) => a.sort - b.sort)
-  //   .map(({ value }) => value);
 
   const ContextValue: TGameContext = {
     cards,
@@ -132,13 +115,7 @@ const Home: FC = () => {
       <Endup end={end} setEnd={setEnd} />
       <WannaPlay />
       <gameInfo.Provider value={ContextValue}>
-        {!start ? (
-          <GameOptions />
-        ) : (
-          // <div className="grid min-h-screen gap-3 p-2 place-content-center md:p-8">
-          // </div>
-          <GameSection />
-        )}
+        {!start ? <GameOptions /> : <GameSection />}
       </gameInfo.Provider>
     </>
   );

@@ -6,6 +6,4 @@ export default interface TCard {
   id: string;
   icon: StaticImageData;
   setSelected: Dispatch<SetStateAction<string[]>>;
-  // { src: string };
-  // Module;
 }

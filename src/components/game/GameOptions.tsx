@@ -1,17 +1,6 @@
-import Image from "next/image";
-import React, {
-  Dispatch,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-import { setEnvironmentData } from "worker_threads";
+import React, { FC, ReactNode, useContext } from "react";
 import gameContext from "../../context/gameContext";
 import { nCards, nKinds, nPairs } from "../../data";
-import { TGameOptions } from "../../types/gameInfo";
 
 const Article: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -47,7 +36,6 @@ const OptionMenu: FC = () => {
         <div className="grid w-full grid-cols-3 gap-3 ">
           <Article>
             <Label title="Kind" />
-            {/* {cardsKind} */}
             {nKinds.map((v) => {
               return (
                 <button
@@ -62,20 +50,7 @@ const OptionMenu: FC = () => {
                     backgroundImage: `url(${v.icon.src})`,
                     backgroundSize: "70px 70px",
                   }}
-                >
-                  {/* <div className="flex items-center justify-center"> */}
-                  {/* <Image
-                src={v.icon}
-                alt={v.value}
-                width={"100%"}
-                height={"100%"}
-                onClick={() => {
-                  return;
-                }}
-                className="pointer-events-none"
-              /> */}
-                  {/* </div> */}
-                </button>
+                ></button>
               );
             })}
           </Article>

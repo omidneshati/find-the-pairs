@@ -1,7 +1,6 @@
 import Image from "next/image";
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useContext } from "react";
 import gameInfo from "../context/gameContext";
-import TCard from "../types/card";
 import { TPick, TSVG } from "../types/gameInfo";
 
 const isExist = (
@@ -26,7 +25,6 @@ const Card: FC<TSVG> = ({ id, name, file }) => {
   return (
     <button
       disabled={isExist(selected, foundPairs, { name, id }) || showImages}
-      // className="relative w-full h-full mx-auto bg-transparent bg-gray-200 rounded-md aspect-square"
       className="w-full h-full bg-transparent rounded-md aspect-square"
       style={{
         perspective: "1000px",
@@ -42,7 +40,6 @@ const Card: FC<TSVG> = ({ id, name, file }) => {
         style={{
           transformStyle: "preserve-3d",
           transform:
-            // selected.includes({ name, id }) || foundPairs.includes({ name, id })
             isExist(selected, foundPairs, { name, id }) || showImages
               ? "rotateY(180deg)"
               : "",

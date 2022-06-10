@@ -1,5 +1,4 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { setEnvironmentData } from "worker_threads";
 import gameContext from "../../context/gameContext";
 import Board from "../Board";
 
@@ -11,7 +10,6 @@ const Timer: FC = () => {
   }, []);
   return (
     <>
-      {/* <p className="flex items-center justify-center text-4xl font-semibold rotateBorder"> */}
       <div className="flex justify-center h-full row-span-1 rotateBorder">
         <span className="z-10 grid w-full m-2 text-3xl bg-gray-200 rounded-md place-content-center">
           {time}s
