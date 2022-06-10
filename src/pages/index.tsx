@@ -42,7 +42,6 @@ const Home: FC = () => {
   const newSvgs = useMemo(() => {
     const slicedSVG = spliceNumberOfCards(numberOfPairs, svgs, numberOfCards);
     const newSvgs = makePairs(numberOfPairs, slicedSVG);
-    console.log("le", newSvgs.length);
     return newSvgs;
   }, [numberOfCards, numberOfPairs, svgs]);
 
@@ -56,18 +55,12 @@ const Home: FC = () => {
     if (selected.length !== 0 && selected.length > numberOfPairs) {
       if (allEqual(selected, numberOfPairs)) {
         setFoundPairs((v) => [...v, selected[0].name]);
-        console.log("foundPairs", foundPairs);
       }
       setSelected((v) => v.slice(numberOfPairs));
-      console.log("empty setSelected", selected);
     }
-  }, [foundPairs, numberOfPairs, selected]);
+  }, [numberOfPairs, selected]);
 
   useEffect(() => {
-    console.log("end", {
-      cardWP: numberOfCards - numberOfPairs,
-      leTP: foundPairs.length * numberOfPairs,
-    });
     if (numberOfCards - numberOfPairs === foundPairs.length * numberOfPairs) {
       setShowImages(true);
       setTimeout(() => {
@@ -79,10 +72,6 @@ const Home: FC = () => {
       }, 1500);
     }
   }, [foundPairs.length, numberOfCards, numberOfPairs, selected]);
-
-  console.log("selected: ", selected);
-  console.log("foundPairs", foundPairs);
-  console.log("empty setSelected", selected);
 
   const ContextValue: TGameContext = {
     cards,
